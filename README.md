@@ -30,7 +30,7 @@ or
 
 `systemdme.sh -d daemon_name`
 
-## Configuration
+## Service Unit Configuration
 
 In order to maximize the simplicity of its usage, it makes a lot of assumptions about how you would like
 the service to be handled by systemd. Specifically:
@@ -40,4 +40,8 @@ the service to be handled by systemd. Specifically:
 - WantedBy=-multi-user.target
 - After=multi-user.target
 
+Also, the daemon will be configured to run as the user and group that is running the SystemdMe script.
+
 These assumptions should be reasonable for a typical linux server or workstation (AKA it will work with a vanilla install of Ubuntu or Debian)
+
+As of now, there is no fancy way to override these paramaters, but it's pretty straightforward to edit the bash script as you need to.
