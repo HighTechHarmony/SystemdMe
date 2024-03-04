@@ -3,6 +3,11 @@
 # Author: Scott McGrath
 # Date: 2024-03-03
 
+# Get the current user
+CURRENT_USERNAME=$(whoami)
+# Get the current group
+CURRENT_GROUPNAME=$(id -gn)
+
 # Get the path from the first argument into a variable
 daemon_path=$1
 
@@ -29,6 +34,9 @@ if [ "$daemon_path" == "--delete" ]; then
     fi
 fi
 
+# Derive the working directory from the daemon path
+working_directory=$(dirname $daemon_path)
+
 # Get the name of the service unit from the second argument into a variable
 service_unit_name=$2
 
@@ -43,7 +51,7 @@ echo "Type=simple" >> ${service_unit_name}.service
 echo "User=$CURRENT_USERNAME" >> ${service_unit_name}.service
 echo "Group=$CURRENT_GROUPNAME" >> ${service_unit_name}.service
 echo "Restart=always" >> ${service_unit_name}.service
-echo "WorkingDirectory=$CURRENT_DIRECTORY" >> ${service_unit_name}.service
+echo "WorkingDirectory=$working_directory" >> ${service_unit_name}.service
 echo "ExecStart=${daemon_path}" >> ${service_unit_name}.service
 echo "[Install]" >> ${service_unit_name}.service
 echo "WantedBy=multi-user.target" >> ${service_unit_name}.service

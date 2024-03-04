@@ -19,7 +19,7 @@ Linux, and possibly other OS that uses systemd to manage services
 As in the description above, the basic usage to create a systemd unit is:
 `systemdme.sh /path/to/daemon daemon_name`
 
-A systemd unit file is created in the current directory. It will then ask you if you would like it to be installed and enabled. Replying 'y' will cause the file to be moved to the systemd unit library and enabled so that it will run on the next bootup.
+A systemd unit file is created in the current directory. It will then ask you if you would like it to be installed and enabled. Replying 'y' will cause the file to be moved to the systemd unit library directory, and enabled so that it will run on the next bootup.
 
 ### Deletion
 
@@ -29,3 +29,15 @@ It also supports deletion of a systemd unit that was previously created:
 or
 
 `systemdme.sh -d daemon_name`
+
+## Configuration
+
+In order to maximize the simplicity of its usage, it makes a lot of assumptions about how you would like
+the service to be handled by systemd. Specifically:
+
+- Type=simple
+- Restart=always
+- WantedBy=-multi-user.target
+- After=multi-user.target
+
+These assumptions should be reasonable for a typical linux server or workstation (AKA it will work with a vanilla install of Ubuntu or Debian)
