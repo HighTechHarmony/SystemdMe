@@ -11,6 +11,9 @@ CURRENT_GROUPNAME=$(id -gn)
 # Get the path from the first argument into a variable
 daemon_path=$1
 
+# Get the name of the service unit from the second argument into a variable
+service_unit_name=$2
+
 # If the first argument is empty, print usage and exit
 if [ -z "$daemon_path" ]; then
     echo "Usage: bash SystemdMe.sh /path/to/daemon name_of_service_unit"
@@ -37,8 +40,6 @@ fi
 # Derive the working directory from the daemon path
 working_directory=$(dirname $daemon_path)
 
-# Get the name of the service unit from the second argument into a variable
-service_unit_name=$2
 
 
 # Generate a systemd service unit based on the current directory and user
