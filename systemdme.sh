@@ -65,8 +65,8 @@ if [ "$INSTALL_SYSTEMD" != "n" ]; then
     echo "Installing systemd service unit..."
     sudo mv ${service_unit_name}.service /etc/systemd/system
     sudo systemctl daemon-reload
-    sudo systemctl enable ${daemon_path}.service
-    sudo systemctl start ${daemon_path}.service
+    sudo systemctl enable ${service_unit_name}.service
+    sudo systemctl start ${service_unit_name}.service
 else
     echo "Skipping systemd service unit installation..."
 fi
