@@ -63,7 +63,7 @@ read -r INSTALL_SYSTEMD
 INSTALL_SYSTEMD=$(echo "$INSTALL_SYSTEMD" | tr '[:upper:]' '[:lower:]')
 if [ "$INSTALL_SYSTEMD" != "n" ]; then
     echo "Installing systemd service unit..."
-    sudo cp ${daemon_path}.service /etc/systemd/system
+    sudo mv ${service_unit_name}.service /etc/systemd/system
     sudo systemctl daemon-reload
     sudo systemctl enable ${daemon_path}.service
     sudo systemctl start ${daemon_path}.service
