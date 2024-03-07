@@ -14,8 +14,8 @@ daemon_path=$1
 # Get the name of the service unit from the second argument into a variable
 service_unit_name=$2
 
-# If the first argument is empty, print usage and exit
-if [ -z "$daemon_path" ]; then
+# If the first or second argument is empty, print usage and exit
+if [ -z "$daemon_path" ] || [ -z "$service_unit_name" ]; then
     echo "Usage: bash SystemdMe.sh /path/to/daemon name_of_service_unit"
     exit 1
 fi
